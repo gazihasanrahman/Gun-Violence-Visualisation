@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Map: People Killed</title>
+		<link rel="stylesheet" href="css/uikit.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	  <link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+		<style type="text/css">
+#container {
+    height: 500px;
+    min-width: 310px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: gray;
+}
+
+		</style>
+	</head>
+	<body>
+
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-dark navbar-expand-md" uk-sticky="top: 200; ">
+			<div class="container">
+				<a href="Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="navbar-brand font-weight-bold"> Gun Violence in the USA</a>
+
+			 </div>
+		 </nav>
+
+		 <!-- Side navigation -->
+		 <div class="container-fluid">
+				 <div class="row">
+						 <aside class="col-2 px-0 py-5 mt-5 fixed-top" id="left">
+						 <div class="list-group w-400">
+							 <a href="Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="list-group-item bg-dark text-light">Map: People Killed</a>
+							 <a href="Highcharts-Maps-9.0.1/examples/honeycomb-usa/index.htm"  class="list-group-item bg-dark text-light">Honeycomb: People Killed</a>
+							 <a href="Highcharts-Maps-9.0.1/examples/mappoint-latlon/index.htm"  class="list-group-item bg-dark text-light">Mass Murder Location</a>
+							 <a href="Highcharts-9.0.1/examples/dynamic-master-detail/index.htm" class="list-group-item bg-dark text-light">People Killed - Timeline</a>
+							 <a href="Highcharts-9.0.1/examples/parliament-chart/index.htm"  class="list-group-item bg-dark text-light">Participant Ratio</a>
+							 <a href="Highcharts-9.0.1/examples/3d-pie-donut/index.htm" class="list-group-item bg-dark text-light">Participant's Age Group</a>
+							 <a href="Highcharts-9.0.1/examples/column-rotated-labels%20-%20month/index.htm" class="list-group-item bg-dark text-light">People Killed (Month View)</a>
+							 <a href="Highcharts-9.0.1/examples/column-rotated-labels%20-%20week/index.htm" class="list-group-item bg-dark text-light">People Killed (Day View)</a>
+							 <a href="Highcharts-9.0.1/examples/column-drilldown/index.htm"  class="list-group-item bg-dark text-light">Type of Gun Used</a>
+							 <a href="Highcharts-9.0.1/examples/bar-basic/index.htm" class="list-group-item bg-dark text-light">Relationship with Education</a>
+							 <a href="Highcharts-9.0.1/examples/scatter/index.htm" class="list-group-item bg-dark text-light">Relationship with Politics</a>
+							 <a href="Highcharts-9.0.1/examples/bar-negative-stack/index.htm" class="list-group-item bg-dark text-light">Relationship with Race</a>
+							 <a href="Highcharts-9.0.1/examples/pie-basic/index.htm" class="list-group-item bg-dark text-light">Incident Characteristics</a>
+							 <a href="index.html" class="list-group-item bg-dark text-light">Reference</a>
+						 </div>
+						 </aside>
+			 </div>
+		 </div>
+
+
+<script src="Highcharts-Maps-9.0.1/code/highmaps.js"></script>
+<script src="Highcharts-Maps-9.0.1/code/modules/data.js"></script>
+<script src="Highcharts-Maps-9.0.1/code/modules/exporting.js"></script>
+<script src="Highcharts-Maps-9.0.1/code/modules/offline-exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
+<div id="container"></div>
+
+
+
+		<script type="text/javascript">
+Highcharts.getJSON('https://raw.githubusercontent.com/gazihasanrahman/Gun-Violence-Visualisation/main/us-killed.json', function (data) {
+
+    // Make codes uppercase to match the map data
+    data.forEach(function (p) {
+        p.code = p.code.toUpperCase();
+    });
+
+    // Instantiate the map
+    Highcharts.mapChart('container', {
+
+        chart: {
+            map: 'countries/us/us-all',
+
+        },
+
+        title: {
+            text: 'Number People Killed in each State'
+        },
+
+        exporting: {
+            sourceWidth: 600,
+            sourceHeight: 500
+        },
+
+        legend: {
+            layout: 'horizontal',
+            borderWidth: 0,
+            backgroundColor: 'rgba(255,255,255,0.85)',
+            floating: true,
+            verticalAlign: 'top',
+            y: 25
+        },
+
+        mapNavigation: {
+            enabled: true
+        },
+
+        colorAxis: {
+            min: 1,
+            type: 'logarithmic',
+            minColor: '#ffe0e0',
+            maxColor: '#ad0000',
+            stops: [
+                [0, '#ffe0e0'],
+                [0.70, '#ff9c9c'],
+                [1, '#ad0000']
+            ]
+        },
+
+        series: [{
+            animation: {
+                duration: 1000
+            },
+            data: data,
+            joinBy: ['postal-code', 'code'],
+            dataLabels: {
+                enabled: true,
+                color: '#FFFFFF',
+                format: '{point.code}'
+            },
+            name: 'People Killed',
+            tooltip: {
+                pointFormat: '{point.code}: {point.value}'
+            }
+        }]
+    });
+});
+
+		</script>
+
+		<p class="text-center">
+			<br>
+		This map shows the number of people killed in gunfire from January 2014 to March 2018 in each state of USA.
+		</p>
+
+	</body>
+</html>

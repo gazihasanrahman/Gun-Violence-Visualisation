@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Type of Gun Used</title>
+		<link rel="stylesheet" href="css/uikit.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	  <link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<style type="text/css">
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 310px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+#container {
+    height: 400px;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+		</style>
+	</head>
+	<body>
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-dark navbar-expand-md" uk-sticky="top: 200; ">
+				<div class="container">
+					<a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="navbar-brand font-weight-bold"> Gun Violence in the USA</a>
+
+				 </div>
+			 </nav>
+
+			 <!-- Side navigation -->
+			 <div class="container-fluid">
+					 <div class="row">
+							 <aside class="col-2 px-0 py-5 mt-5 fixed-top" id="left">
+							 <div class="list-group w-400">
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="list-group-item bg-dark text-light">Map: People Killed by State</a>
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/honeycomb-usa/index.htm"  class="list-group-item bg-dark text-light">Honeycomb: People Killed by State</a>
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/mappoint-latlon/index.htm"  class="list-group-item bg-dark text-light">Mass Murder Location</a>
+								 <a href="../../../Highcharts-9.0.1/examples/dynamic-master-detail/index.htm" class="list-group-item bg-dark text-light">People Killed - Timeline</a>
+								 <a href="../../../Highcharts-9.0.1/examples/parliament-chart/index.htm"  class="list-group-item bg-dark text-light">Participant Ratio</a>
+								 <a href="../../../Highcharts-9.0.1/examples/3d-pie-donut/index.htm" class="list-group-item bg-dark text-light">Participant's Age Group</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20month/index.htm" class="list-group-item bg-dark text-light">People Killed (Month View)</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20week/index.htm" class="list-group-item bg-dark text-light">People Killed (Day View)</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-drilldown/index.htm"  class="list-group-item bg-dark text-light">Type of Gun Used</a>
+								 <a href="../../../Highcharts-9.0.1/examples/bar-basic/index.htm" class="list-group-item bg-dark text-light">Relationship with Education</a>
+								 <a href="../../../Highcharts-9.0.1/examples/scatter/index.htm" class="list-group-item bg-dark text-light">Relationship with Politics</a>
+								 <a href="../../../Highcharts-9.0.1/examples/bar-negative-stack/index.htm" class="list-group-item bg-dark text-light">Relationship with Race</a>
+								 <a href="../../../Highcharts-9.0.1/examples/pie-basic/index.htm" class="list-group-item bg-dark text-light">Incident Characteristics</a>
+								 <a href="../../../index.html" class="list-group-item bg-dark text-light">Reference</a>
+							 </div>
+							 </aside>
+				 </div>
+			 </div>
+
+
+<script src="../../code/highcharts.js"></script>
+<script src="../../code/modules/data.js"></script>
+<script src="../../code/modules/drilldown.js"></script>
+<script src="../../code/modules/exporting.js"></script>
+<script src="../../code/modules/export-data.js"></script>
+<script src="../../code/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        This chart compare the types of gun used in different incidents. By clicking on individual category we can see the different types of gun models of each category.
+    </p>
+</figure>
+
+
+
+		<script type="text/javascript">
+// Create the chart
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Type of Gun Used in Different Incidents'
+    },
+    subtitle: {
+        text: 'Click the columns to view the models of each category'
+    },
+    accessibility: {
+        announceNewData: {
+            enabled: true
+        }
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Number of incidents'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.0f}'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b> incidents<br/>'
+    },
+
+    series: [
+        {
+            name: "Gun type",
+            colorByPoint: true,
+            data: [
+                {
+                    name: "Handgun",
+                    y: 43011,
+                    drilldown: "Handgun"
+                },
+                {
+                    name: "Rifle",
+                    y: 11492,
+                    drilldown: "Rifle"
+                },
+                {
+                    name: "Shotgun",
+                    y: 5730,
+                    drilldown: "Shotgun"
+                }
+            ]
+        }
+    ],
+    drilldown: {
+        series: [
+            {
+                name: "Handgun",
+                id: "Handgun",
+                data: [
+                    [
+                        "Others",
+                        25050
+                    ],
+                    [
+                        "9mm",
+                        6461
+                    ],
+                    [
+                        "40 SW",
+                        2749
+                    ],
+                    [
+                        "380 Auto",
+                        2398
+                    ],
+                    [
+                        "45 Auto",
+                        2368
+                    ],
+                    [
+                        "38 Special",
+                        1811
+                    ],
+                    [
+                        "357 Mag",
+                        824
+                    ],
+                    [
+                        "25 Auto",
+                        612
+                    ],
+                    [
+                        "32 Auto",
+                        490
+                    ],
+                    [
+                        "44 Mag",
+                        198
+                    ]
+                ]
+            },
+            {
+                name: "Rifle",
+                id: "Rifle",
+                data: [
+                    [
+                        "Others",
+                        5271
+                    ],
+                    [
+                        "22 LR",
+                        3358
+                    ],
+                    [
+                        "AR-15",
+                        1613
+                    ],
+                    [
+                        "AK-47",
+                        940
+                    ],
+                    [
+                        "30-30 Win",
+                        110
+                    ],
+                    [
+                        "308 Win",
+                        93
+                    ],
+                    [
+                        "30-06 Spr",
+                        84
+                    ]
+                ]
+            },
+            {
+                name: "Shotgun",
+                id: "Shotgun",
+                data: [
+                    [
+                        "Other",
+                        4271
+                    ],
+                    [
+                        "12 gauge",
+                        1116
+                    ],
+                    [
+                        "20 gauge",
+                        207
+                    ],
+										[
+                        "410 gauge",
+                        97
+                    ],
+                    [
+                        "16 gauge",
+                        33
+                    ],
+                    [
+                        "28 gauge",
+                        6
+                    ]
+                ]
+            }
+        ]
+    }
+});
+		</script>
+	</body>
+</html>

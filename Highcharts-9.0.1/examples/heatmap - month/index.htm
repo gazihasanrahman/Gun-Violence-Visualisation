@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Heatmap: Killed in a Month</title>
+		<link rel="stylesheet" href="css/uikit.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	  <link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<style type="text/css">
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 360px;
+    max-width: 1100px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+		</style>
+	</head>
+	<body>
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-dark navbar-expand-md" uk-sticky="top: 200; ">
+				<div class="container">
+					<a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="navbar-brand font-weight-bold"> Gun Violence in the USA</a>
+
+				 </div>
+			 </nav>
+
+			 <!-- Side navigation -->
+			 <div class="container-fluid">
+					 <div class="row">
+							 <aside class="col-2 px-0 py-5 mt-5 fixed-top" id="left">
+							 <div class="list-group w-400">
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="list-group-item bg-dark text-light">Map: People Killed by State</a>
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/honeycomb-usa/index.htm"  class="list-group-item bg-dark text-light">Honeycomb: People Killed by State</a>
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/mappoint-latlon/index.htm"  class="list-group-item bg-dark text-light">Mass Murder Location</a>
+								 <a href="../../../Highcharts-9.0.1/examples/dynamic-master-detail/index.htm" class="list-group-item bg-dark text-light">People Killed - Timeline</a>
+								 <a href="../../../Highcharts-9.0.1/examples/parliament-chart/index.htm"  class="list-group-item bg-dark text-light">Participant Ratio</a>
+								 <a href="../../../Highcharts-9.0.1/examples/3d-pie-donut/index.htm" class="list-group-item bg-dark text-light">Participant's Age Group</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20month/index.htm" class="list-group-item bg-dark text-light">People Killed (Month View)</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20week/index.htm" class="list-group-item bg-dark text-light">People Killed (Day View)</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-drilldown/index.htm"  class="list-group-item bg-dark text-light">Type of Gun Used</a>
+								 <a href="../../../Highcharts-9.0.1/examples/bar-basic/index.htm" class="list-group-item bg-dark text-light">Relationship with Education</a>
+								 <a href="../../../Highcharts-9.0.1/examples/scatter/index.htm" class="list-group-item bg-dark text-light">Relationship with Politics</a>
+								 <a href="../../../Highcharts-9.0.1/examples/bar-negative-stack/index.htm" class="list-group-item bg-dark text-light">Relationship with Race</a>
+								 <a href="../../../Highcharts-9.0.1/examples/pie-basic/index.htm" class="list-group-item bg-dark text-light">Incident Characteristics</a>
+								 <a href="../../../index.html" class="list-group-item bg-dark text-light">Reference</a>
+							 </div>
+							 </aside>
+				 </div>
+			 </div>
+
+
+<script src="../../code/highcharts.js"></script>
+<script src="../../code/modules/heatmap.js"></script>
+<script src="../../code/modules/exporting.js"></script>
+<script src="../../code/modules/export-data.js"></script>
+<script src="../../code/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        This heatmap is showing the number of people killed on month wise during this timeframe.
+    </p>
+</figure>
+
+
+
+		<script type="text/javascript">
+
+function getPointCategoryName(point, dimension) {
+    var series = point.series,
+        isY = dimension === 'y',
+        axis = series[isY ? 'yAxis' : 'xAxis'];
+    return axis.categories[point[isY ? 'y' : 'x']];
+}
+
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'heatmap',
+				height: 1000,
+			  marginTop: 80,
+        marginBottom: 40,
+        plotBorderWidth: 1
+    },
+
+
+    title: {
+        text: 'Heatmap: Killed in a Month'
+    },
+
+    xAxis: {
+        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+				opposite: true
+    },
+
+    yAxis: {
+        categories: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
+        title: null,
+        reversed: true
+    },
+
+    accessibility: {
+        point: {
+            descriptionFormatter: function (point) {
+                var ix = point.index + 1,
+                    xName = getPointCategoryName(point, 'x'),
+                    yName = getPointCategoryName(point, 'y'),
+                    val = point.value;
+                return ix + '. ' + xName + ' sales ' + yName + ', ' + val + '.';
+            }
+        }
+    },
+
+    colorAxis: {
+        min: 0,
+        minColor: '#FFFFFF',
+        maxColor: Highcharts.getOptions().colors[0]
+    },
+
+    legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' +
+                this.point.value + '</b> killed in <b>' + getPointCategoryName(this.point, 'y') +'</b> <br> in <b>' + getPointCategoryName(this.point, 'x') + '</b>';
+        }
+
+				// {
+				// 	 return '<b>' + getPointCategoryName(this.point, 'x') + '</b> sold <br><b>' +
+				// 			 this.point.value + '</b> items on <br><b>' + getPointCategoryName(this.point, 'y') + '</b>';
+			 // }
+
+    },
+
+    series: [{
+        name: 'Sales per employee',
+        borderWidth: 1,
+        data: [
+
+					[0, 0, 209], 	[0, 1, 27], 	[0, 2, 103], 	[0, 3, 77], 	[0, 4, 551], 	[0, 5, 87], 	[0, 6, 28], 	[0, 7, 30], 	[0, 8, 40], 	[0, 9, 429], 	[0, 10, 218], 	[0, 11, 7], 	[0, 12, 23], 	[0, 13, 315], 	[0, 14, 142], 	[0, 15, 31], 	[0, 16, 44], 	[0, 17, 98], 	[0, 18, 205], 	[0, 19, 8], 	[0, 20, 179], 	[0, 21, 56], 	[0, 22, 145], 	[0, 23, 38], 	[0, 24, 122], 	[0, 25, 218], 	[0, 26, 18], 	[0, 27, 36], 	[0, 28, 76], 	[0, 29, 5], 	[0, 30, 103], 	[0, 31, 34], 	[0, 32, 143], 	[0, 33, 190], 	[0, 34, 7], 	[0, 35, 270], 	[0, 36, 97], 	[0, 37, 53], 	[0, 38, 269], 	[0, 39, 4], 	[0, 40, 148], 	[0, 41, 7], 	[0, 42, 180], 	[0, 43, 550], 	[0, 44, 27], 	[0, 45, 6], 	[0, 46, 153], 	[0, 47, 85], 	[0, 48, 41], 	[0, 49, 72], 	[0, 50, 8],
+[1, 0, 156], 	[1, 1, 23], 	[1, 2, 94], 	[1, 3, 65], 	[1, 4, 474], 	[1, 5, 67], 	[1, 6, 17], 	[1, 7, 20], 	[1, 8, 35], 	[1, 9, 341], 	[1, 10, 196], 	[1, 11, 5], 	[1, 12, 16], 	[1, 13, 244], 	[1, 14, 138], 	[1, 15, 22], 	[1, 16, 47], 	[1, 17, 111], 	[1, 18, 171], 	[1, 19, 8], 	[1, 20, 114], 	[1, 21, 35], 	[1, 22, 138], 	[1, 23, 36], 	[1, 24, 131], 	[1, 25, 162], 	[1, 26, 9], 	[1, 27, 8], 	[1, 28, 77], 	[1, 29, 5], 	[1, 30, 70], 	[1, 31, 47], 	[1, 32, 112], 	[1, 33, 188], 	[1, 34, 7], 	[1, 35, 227], 	[1, 36, 70], 	[1, 37, 42], 	[1, 38, 174], 	[1, 39, 3], 	[1, 40, 117], 	[1, 41, 11], 	[1, 42, 170], 	[1, 43, 432], 	[1, 44, 28], 	[1, 45, 4], 	[1, 46, 100], 	[1, 47, 74], 	[1, 48, 28], 	[1, 49, 57], 	[1, 50, 5],
+[2, 0, 189], 	[2, 1, 28], 	[2, 2, 101], 	[2, 3, 61], 	[2, 4, 538], 	[2, 5, 69], 	[2, 6, 30], 	[2, 7, 14], 	[2, 8, 49], 	[2, 9, 409], 	[2, 10, 219], 	[2, 11, 6], 	[2, 12, 19], 	[2, 13, 249], 	[2, 14, 159], 	[2, 15, 20], 	[2, 16, 54], 	[2, 17, 98], 	[2, 18, 207], 	[2, 19, 8], 	[2, 20, 137], 	[2, 21, 40], 	[2, 22, 142], 	[2, 23, 35], 	[2, 24, 111], 	[2, 25, 185], 	[2, 26, 23], 	[2, 27, 17], 	[2, 28, 73], 	[2, 29, 10], 	[2, 30, 101], 	[2, 31, 46], 	[2, 32, 152], 	[2, 33, 218], 	[2, 34, 8], 	[2, 35, 213], 	[2, 36, 97], 	[2, 37, 38], 	[2, 38, 221], 	[2, 39, 4], 	[2, 40, 166], 	[2, 41, 6], 	[2, 42, 161], 	[2, 43, 544], 	[2, 44, 14], 	[2, 45, 3], 	[2, 46, 114], 	[2, 47, 80], 	[2, 48, 29], 	[2, 49, 96], 	[2, 50, 5],
+[3, 0, 133], 	[3, 1, 17], 	[3, 2, 84], 	[3, 3, 54], 	[3, 4, 422], 	[3, 5, 55], 	[3, 6, 25], 	[3, 7, 22], 	[3, 8, 25], 	[3, 9, 283], 	[3, 10, 186], 	[3, 11, 3], 	[3, 12, 7], 	[3, 13, 215], 	[3, 14, 126], 	[3, 15, 26], 	[3, 16, 44], 	[3, 17, 81], 	[3, 18, 146], 	[3, 19, 8], 	[3, 20, 120], 	[3, 21, 29], 	[3, 22, 123], 	[3, 23, 40], 	[3, 24, 91], 	[3, 25, 138], 	[3, 26, 8], 	[3, 27, 23], 	[3, 28, 77], 	[3, 29, 5], 	[3, 30, 93], 	[3, 31, 34], 	[3, 32, 115], 	[3, 33, 164], 	[3, 34, 3], 	[3, 35, 176], 	[3, 36, 61], 	[3, 37, 30], 	[3, 38, 165], 	[3, 39, 2], 	[3, 40, 117], 	[3, 41, 9], 	[3, 42, 122], 	[3, 43, 362], 	[3, 44, 16], 	[3, 45, 4], 	[3, 46, 110], 	[3, 47, 64], 	[3, 48, 22], 	[3, 49, 67], 	[3, 50, 5],
+[4, 0, 146], 	[4, 1, 28], 	[4, 2, 95], 	[4, 3, 72], 	[4, 4, 456], 	[4, 5, 67], 	[4, 6, 29], 	[4, 7, 21], 	[4, 8, 34], 	[4, 9, 306], 	[4, 10, 179], 	[4, 11, 7], 	[4, 12, 14], 	[4, 13, 311], 	[4, 14, 116], 	[4, 15, 11], 	[4, 16, 39], 	[4, 17, 77], 	[4, 18, 175], 	[4, 19, 7], 	[4, 20, 162], 	[4, 21, 31], 	[4, 22, 138], 	[4, 23, 38], 	[4, 24, 91], 	[4, 25, 156], 	[4, 26, 15], 	[4, 27, 20], 	[4, 28, 64], 	[4, 29, 8], 	[4, 30, 90], 	[4, 31, 46], 	[4, 32, 150], 	[4, 33, 167], 	[4, 34, 7], 	[4, 35, 183], 	[4, 36, 61], 	[4, 37, 27], 	[4, 38, 188], 	[4, 39, 6], 	[4, 40, 118], 	[4, 41, 5], 	[4, 42, 128], 	[4, 43, 418], 	[4, 44, 19], 	[4, 45, 4], 	[4, 46, 129], 	[4, 47, 57], 	[4, 48, 17], 	[4, 49, 76], 	[4, 50, 1],
+[5, 0, 142], 	[5, 1, 17], 	[5, 2, 81], 	[5, 3, 52], 	[5, 4, 433], 	[5, 5, 58], 	[5, 6, 30], 	[5, 7, 19], 	[5, 8, 34], 	[5, 9, 357], 	[5, 10, 214], 	[5, 11, 6], 	[5, 12, 17], 	[5, 13, 310], 	[5, 14, 115], 	[5, 15, 26], 	[5, 16, 33], 	[5, 17, 96], 	[5, 18, 187], 	[5, 19, 6], 	[5, 20, 134], 	[5, 21, 44], 	[5, 22, 124], 	[5, 23, 39], 	[5, 24, 85], 	[5, 25, 168], 	[5, 26, 10], 	[5, 27, 20], 	[5, 28, 64], 	[5, 29, 5], 	[5, 30, 107], 	[5, 31, 43], 	[5, 32, 144], 	[5, 33, 162], 	[5, 34, 10], 	[5, 35, 191], 	[5, 36, 80], 	[5, 37, 36], 	[5, 38, 192], 	[5, 39, 9], 	[5, 40, 131], 	[5, 41, 5], 	[5, 42, 134], 	[5, 43, 386], 	[5, 44, 32], 	[5, 45, 1], 	[5, 46, 115], 	[5, 47, 62], 	[5, 48, 22], 	[5, 49, 67], 	[5, 50, 6],
+[6, 0, 153], 	[6, 1, 28], 	[6, 2, 93], 	[6, 3, 76], 	[6, 4, 464], 	[6, 5, 71], 	[6, 6, 41], 	[6, 7, 20], 	[6, 8, 44], 	[6, 9, 333], 	[6, 10, 212], 	[6, 11, 7], 	[6, 12, 11], 	[6, 13, 335], 	[6, 14, 127], 	[6, 15, 12], 	[6, 16, 47], 	[6, 17, 83], 	[6, 18, 226], 	[6, 19, 25], 	[6, 20, 175], 	[6, 21, 39], 	[6, 22, 113], 	[6, 23, 46], 	[6, 24, 98], 	[6, 25, 195], 	[6, 26, 13], 	[6, 27, 14], 	[6, 28, 60], 	[6, 29, 9], 	[6, 30, 96], 	[6, 31, 52], 	[6, 32, 151], 	[6, 33, 189], 	[6, 34, 4], 	[6, 35, 209], 	[6, 36, 72], 	[6, 37, 37], 	[6, 38, 205], 	[6, 39, 9], 	[6, 40, 143], 	[6, 41, 4], 	[6, 42, 166], 	[6, 43, 407], 	[6, 44, 29], 	[6, 45, 5], 	[6, 46, 98], 	[6, 47, 82], 	[6, 48, 22], 	[6, 49, 85], 	[6, 50, 10],
+[7, 0, 131], 	[7, 1, 16], 	[7, 2, 97], 	[7, 3, 67], 	[7, 4, 473], 	[7, 5, 47], 	[7, 6, 39], 	[7, 7, 14], 	[7, 8, 38], 	[7, 9, 286], 	[7, 10, 220], 	[7, 11, 4], 	[7, 12, 17], 	[7, 13, 342], 	[7, 14, 149], 	[7, 15, 26], 	[7, 16, 53], 	[7, 17, 96], 	[7, 18, 153], 	[7, 19, 8], 	[7, 20, 150], 	[7, 21, 52], 	[7, 22, 141], 	[7, 23, 38], 	[7, 24, 80], 	[7, 25, 191], 	[7, 26, 14], 	[7, 27, 12], 	[7, 28, 61], 	[7, 29, 7], 	[7, 30, 103], 	[7, 31, 46], 	[7, 32, 157], 	[7, 33, 193], 	[7, 34, 9], 	[7, 35, 215], 	[7, 36, 86], 	[7, 37, 32], 	[7, 38, 200], 	[7, 39, 4], 	[7, 40, 137], 	[7, 41, 7], 	[7, 42, 155], 	[7, 43, 368], 	[7, 44, 24], 	[7, 45, 8], 	[7, 46, 125], 	[7, 47, 72], 	[7, 48, 33], 	[7, 49, 89], 	[7, 50, 7],
+[8, 0, 151], 	[8, 1, 25], 	[8, 2, 78], 	[8, 3, 58], 	[8, 4, 413], 	[8, 5, 56], 	[8, 6, 25], 	[8, 7, 11], 	[8, 8, 41], 	[8, 9, 277], 	[8, 10, 188], 	[8, 11, 6], 	[8, 12, 10], 	[8, 13, 303], 	[8, 14, 143], 	[8, 15, 30], 	[8, 16, 34], 	[8, 17, 62], 	[8, 18, 167], 	[8, 19, 6], 	[8, 20, 135], 	[8, 21, 34], 	[8, 22, 142], 	[8, 23, 42], 	[8, 24, 92], 	[8, 25, 170], 	[8, 26, 8], 	[8, 27, 19], 	[8, 28, 49], 	[8, 29, 13], 	[8, 30, 113], 	[8, 31, 32], 	[8, 32, 136], 	[8, 33, 176], 	[8, 34, 1], 	[8, 35, 207], 	[8, 36, 68], 	[8, 37, 41], 	[8, 38, 194], 	[8, 39, 6], 	[8, 40, 135], 	[8, 41, 15], 	[8, 42, 145], 	[8, 43, 374], 	[8, 44, 18], 	[8, 45, 5], 	[8, 46, 123], 	[8, 47, 63], 	[8, 48, 27], 	[8, 49, 64], 	[8, 50, 11],
+[9, 0, 155], 	[9, 1, 15], 	[9, 2, 97], 	[9, 3, 71], 	[9, 4, 416], 	[9, 5, 76], 	[9, 6, 24], 	[9, 7, 10], 	[9, 8, 34], 	[9, 9, 290], 	[9, 10, 216], 	[9, 11, 5], 	[9, 12, 8], 	[9, 13, 272], 	[9, 14, 128], 	[9, 15, 21], 	[9, 16, 45], 	[9, 17, 104], 	[9, 18, 176], 	[9, 19, 4], 	[9, 20, 133], 	[9, 21, 43], 	[9, 22, 122], 	[9, 23, 30], 	[9, 24, 84], 	[9, 25, 185], 	[9, 26, 11], 	[9, 27, 13], 	[9, 28, 53], 	[9, 29, 6], 	[9, 30, 91], 	[9, 31, 31], 	[9, 32, 149], 	[9, 33, 184], 	[9, 34, 5], 	[9, 35, 185], 	[9, 36, 86], 	[9, 37, 45], 	[9, 38, 200], 	[9, 39, 5], 	[9, 40, 115], 	[9, 41, 5], 	[9, 42, 148], 	[9, 43, 359], 	[9, 44, 18], 	[9, 45, 4], 	[9, 46, 116], 	[9, 47, 73], 	[9, 48, 27], 	[9, 49, 68], 	[9, 50, 4],
+[10, 0, 162], 	[10, 1, 17], 	[10, 2, 77], 	[10, 3, 56], 	[10, 4, 434], 	[10, 5, 88], 	[10, 6, 17], 	[10, 7, 15], 	[10, 8, 35], 	[10, 9, 268], 	[10, 10, 199], 	[10, 11, 5], 	[10, 12, 14], 	[10, 13, 255], 	[10, 14, 136], 	[10, 15, 29], 	[10, 16, 47], 	[10, 17, 83], 	[10, 18, 173], 	[10, 19, 12], 	[10, 20, 108], 	[10, 21, 37], 	[10, 22, 130], 	[10, 23, 46], 	[10, 24, 81], 	[10, 25, 198], 	[10, 26, 12], 	[10, 27, 20], 	[10, 28, 75], 	[10, 29, 10], 	[10, 30, 101], 	[10, 31, 38], 	[10, 32, 121], 	[10, 33, 190], 	[10, 34, 8], 	[10, 35, 223], 	[10, 36, 73], 	[10, 37, 36], 	[10, 38, 177], 	[10, 39, 5], 	[10, 40, 161], 	[10, 41, 13], 	[10, 42, 136], 	[10, 43, 390], 	[10, 44, 26], 	[10, 45, 5], 	[10, 46, 133], 	[10, 47, 60], 	[10, 48, 29], 	[10, 49, 51], 	[10, 50, 7],
+[11, 0, 150], 	[11, 1, 26], 	[11, 2, 86], 	[11, 3, 64], 	[11, 4, 442], 	[11, 5, 51], 	[11, 6, 34], 	[11, 7, 18], 	[11, 8, 38], 	[11, 9, 308], 	[11, 10, 204], 	[11, 11, 2], 	[11, 12, 10], 	[11, 13, 244], 	[11, 14, 120], 	[11, 15, 19], 	[11, 16, 49], 	[11, 17, 73], 	[11, 18, 185], 	[11, 19, 12], 	[11, 20, 139], 	[11, 21, 32], 	[11, 22, 121], 	[11, 23, 30], 	[11, 24, 108], 	[11, 25, 161], 	[11, 26, 13], 	[11, 27, 23], 	[11, 28, 70], 	[11, 29, 5], 	[11, 30, 88], 	[11, 31, 41], 	[11, 32, 160], 	[11, 33, 199], 	[11, 34, 0], 	[11, 35, 199], 	[11, 36, 76], 	[11, 37, 29], 	[11, 38, 197], 	[11, 39, 5], 	[11, 40, 111], 	[11, 41, 3], 	[11, 42, 165], 	[11, 43, 432], 	[11, 44, 27], 	[11, 45, 8], 	[11, 46, 140], 	[11, 47, 73], 	[11, 48, 34], 	[11, 49, 70], 	[11, 50, 4]
+
+
+
+			],
+        dataLabels: {
+            enabled: true,
+            color: '#000000'
+        }
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                yAxis: {
+                    labels: {
+                        formatter: function () {
+                            return this.value.charAt(0);
+                        }
+                    }
+                }
+            }
+        }]
+    }
+
+});
+		</script>
+	</body>
+</html>

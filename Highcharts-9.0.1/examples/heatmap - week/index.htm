@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Heatmap: Killed in a Day</title>
+		<link rel="stylesheet" href="css/uikit.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+	  <link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+
+		<style type="text/css">
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 360px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+		</style>
+	</head>
+	<body>
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-dark navbar-expand-md" uk-sticky="top: 200; ">
+				<div class="container">
+					<a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="navbar-brand font-weight-bold"> Gun Violence in the USA</a>
+
+				 </div>
+			 </nav>
+
+			 <!-- Side navigation -->
+			 <div class="container-fluid">
+					 <div class="row">
+							 <aside class="col-2 px-0 py-5 mt-5 fixed-top" id="left">
+							 <div class="list-group w-400">
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="list-group-item bg-dark text-light">Map: People Killed by State</a>
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/honeycomb-usa/index.htm"  class="list-group-item bg-dark text-light">Honeycomb: People Killed by State</a>
+								 <a href="../../../Highcharts-Maps-9.0.1/examples/mappoint-latlon/index.htm"  class="list-group-item bg-dark text-light">Mass Murder Location</a>
+								 <a href="../../../Highcharts-9.0.1/examples/dynamic-master-detail/index.htm" class="list-group-item bg-dark text-light">People Killed - Timeline</a>
+								 <a href="../../../Highcharts-9.0.1/examples/parliament-chart/index.htm"  class="list-group-item bg-dark text-light">Participant Ratio</a>
+								 <a href="../../../Highcharts-9.0.1/examples/3d-pie-donut/index.htm" class="list-group-item bg-dark text-light">Participant's Age Group</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20month/index.htm" class="list-group-item bg-dark text-light">People Killed (Month View)</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20week/index.htm" class="list-group-item bg-dark text-light">People Killed (Day View)</a>
+								 <a href="../../../Highcharts-9.0.1/examples/column-drilldown/index.htm"  class="list-group-item bg-dark text-light">Type of Gun Used</a>
+								 <a href="../../../Highcharts-9.0.1/examples/bar-basic/index.htm" class="list-group-item bg-dark text-light">Relationship with Education</a>
+								 <a href="../../../Highcharts-9.0.1/examples/scatter/index.htm" class="list-group-item bg-dark text-light">Relationship with Politics</a>
+								 <a href="../../../Highcharts-9.0.1/examples/bar-negative-stack/index.htm" class="list-group-item bg-dark text-light">Relationship with Race</a>
+								 <a href="../../../Highcharts-9.0.1/examples/pie-basic/index.htm" class="list-group-item bg-dark text-light">Incident Characteristics</a>
+								 <a href="../../../index.html" class="list-group-item bg-dark text-light">Reference</a>
+							 </div>
+							 </aside>
+				 </div>
+			 </div>
+
+
+<script src="../../code/highcharts.js"></script>
+<script src="../../code/modules/heatmap.js"></script>
+<script src="../../code/modules/exporting.js"></script>
+<script src="../../code/modules/export-data.js"></script>
+<script src="../../code/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        This heatmap is showing the number of people killed on days in a week wise during this timeframe.
+    </p>
+</figure>
+
+
+
+		<script type="text/javascript">
+
+function getPointCategoryName(point, dimension) {
+    var series = point.series,
+        isY = dimension === 'y',
+        axis = series[isY ? 'yAxis' : 'xAxis'];
+    return axis.categories[point[isY ? 'y' : 'x']];
+}
+
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'heatmap',
+				height: 1000,
+        marginTop: 80,
+        marginBottom: 40,
+        plotBorderWidth: 1
+    },
+
+
+    title: {
+        text: 'Heatmap: Killed in a Day'
+    },
+
+    xAxis: {
+        categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+				opposite: true
+    },
+
+    yAxis: {
+        categories: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'],
+        title: null,
+        reversed: true
+    },
+
+    accessibility: {
+        point: {
+            descriptionFormatter: function (point) {
+                var ix = point.index + 1,
+                    xName = getPointCategoryName(point, 'x'),
+                    yName = getPointCategoryName(point, 'y'),
+                    val = point.value;
+                return ix + '. ' + xName + ' sales ' + yName + ', ' + val + '.';
+            }
+        }
+    },
+
+    colorAxis: {
+        min: 0,
+        minColor: '#FFFFFF',
+        maxColor: Highcharts.getOptions().colors[0]
+    },
+
+    legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' +
+                this.point.value + '</b> killed in <b>' + getPointCategoryName(this.point, 'y') +'</b> <br> on <b>' + getPointCategoryName(this.point, 'x') + '</b>';
+        }
+
+				// {
+				// 	 return '<b>' + getPointCategoryName(this.point, 'x') + '</b> sold <br><b>' +
+				// 			 this.point.value + '</b> items on <br><b>' + getPointCategoryName(this.point, 'y') + '</b>';
+			 // }
+
+    },
+
+    series: [{
+        name: 'Sales per employee',
+        borderWidth: 1,
+        data: [
+
+					[0, 0, 300], 	[0, 1, 60], 	[0, 2, 161], 	[0, 3, 110], 	[0, 4, 963], 	[0, 5, 130], 	[0, 6, 48], 	[0, 7, 26], 	[0, 8, 74], 	[0, 9, 669], 	[0, 10, 389], 	[0, 11, 7], 	[0, 12, 18], 	[0, 13, 618], 	[0, 14, 264], 	[0, 15, 56], 	[0, 16, 111], 	[0, 17, 185], 	[0, 18, 353], 	[0, 19, 13], 	[0, 20, 264], 	[0, 21, 87], 	[0, 22, 255], 	[0, 23, 79], 	[0, 24, 174], 	[0, 25, 343], 	[0, 26, 24], 	[0, 27, 39], 	[0, 28, 111], 	[0, 29, 11], 	[0, 30, 204], 	[0, 31, 79], 	[0, 32, 309], 	[0, 33, 362], 	[0, 34, 15], 	[0, 35, 406], 	[0, 36, 129], 	[0, 37, 55], 	[0, 38, 413], 	[0, 39, 8], 	[0, 40, 278], 	[0, 41, 8], 	[0, 42, 304], 	[0, 43, 864], 	[0, 44, 58], 	[0, 45, 13], 	[0, 46, 298], 	[0, 47, 142], 	[0, 48, 46], 	[0, 49, 164], 	[0, 50, 19],
+[1, 0, 261], 	[1, 1, 39], 	[1, 2, 134], 	[1, 3, 113], 	[1, 4, 721], 	[1, 5, 99], 	[1, 6, 47], 	[1, 7, 38], 	[1, 8, 58], 	[1, 9, 565], 	[1, 10, 359], 	[1, 11, 7], 	[1, 12, 19], 	[1, 13, 467], 	[1, 14, 210], 	[1, 15, 32], 	[1, 16, 83], 	[1, 17, 130], 	[1, 18, 328], 	[1, 19, 11], 	[1, 20, 257], 	[1, 21, 52], 	[1, 22, 251], 	[1, 23, 71], 	[1, 24, 169], 	[1, 25, 289], 	[1, 26, 25], 	[1, 27, 30], 	[1, 28, 104], 	[1, 29, 11], 	[1, 30, 172], 	[1, 31, 70], 	[1, 32, 225], 	[1, 33, 324], 	[1, 34, 10], 	[1, 35, 372], 	[1, 36, 142], 	[1, 37, 54], 	[1, 38, 332], 	[1, 39, 14], 	[1, 40, 200], 	[1, 41, 9], 	[1, 42, 271], 	[1, 43, 704], 	[1, 44, 33], 	[1, 45, 9], 	[1, 46, 176], 	[1, 47, 88], 	[1, 48, 45], 	[1, 49, 108], 	[1, 50, 7],
+[2, 0, 238], 	[2, 1, 39], 	[2, 2, 152], 	[2, 3, 110], 	[2, 4, 718], 	[2, 5, 112], 	[2, 6, 54], 	[2, 7, 36], 	[2, 8, 47], 	[2, 9, 490], 	[2, 10, 296], 	[2, 11, 11], 	[2, 12, 29], 	[2, 13, 404], 	[2, 14, 200], 	[2, 15, 32], 	[2, 16, 68], 	[2, 17, 152], 	[2, 18, 281], 	[2, 19, 15], 	[2, 20, 233], 	[2, 21, 61], 	[2, 22, 185], 	[2, 23, 46], 	[2, 24, 137], 	[2, 25, 285], 	[2, 26, 24], 	[2, 27, 31], 	[2, 28, 125], 	[2, 29, 19], 	[2, 30, 151], 	[2, 31, 62], 	[2, 32, 222], 	[2, 33, 291], 	[2, 34, 13], 	[2, 35, 331], 	[2, 36, 131], 	[2, 37, 73], 	[2, 38, 303], 	[2, 39, 10], 	[2, 40, 176], 	[2, 41, 13], 	[2, 42, 281], 	[2, 43, 677], 	[2, 44, 33], 	[2, 45, 7], 	[2, 46, 193], 	[2, 47, 138], 	[2, 48, 48], 	[2, 49, 90], 	[2, 50, 6],
+[3, 0, 262], 	[3, 1, 30], 	[3, 2, 134], 	[3, 3, 99], 	[3, 4, 730], 	[3, 5, 106], 	[3, 6, 47], 	[3, 7, 28], 	[3, 8, 74], 	[3, 9, 504], 	[3, 10, 321], 	[3, 11, 8], 	[3, 12, 21], 	[3, 13, 425], 	[3, 14, 225], 	[3, 15, 41], 	[3, 16, 56], 	[3, 17, 138], 	[3, 18, 308], 	[3, 19, 22], 	[3, 20, 258], 	[3, 21, 60], 	[3, 22, 220], 	[3, 23, 56], 	[3, 24, 165], 	[3, 25, 290], 	[3, 26, 18], 	[3, 27, 36], 	[3, 28, 103], 	[3, 29, 11], 	[3, 30, 134], 	[3, 31, 66], 	[3, 32, 236], 	[3, 33, 298], 	[3, 34, 7], 	[3, 35, 333], 	[3, 36, 138], 	[3, 37, 70], 	[3, 38, 337], 	[3, 39, 7], 	[3, 40, 215], 	[3, 41, 11], 	[3, 42, 221], 	[3, 43, 667], 	[3, 44, 36], 	[3, 45, 10], 	[3, 46, 181], 	[3, 47, 108], 	[3, 48, 37], 	[3, 49, 123], 	[3, 50, 13],
+[4, 0, 241], 	[4, 1, 34], 	[4, 2, 144], 	[4, 3, 87], 	[4, 4, 675], 	[4, 5, 99], 	[4, 6, 37], 	[4, 7, 30], 	[4, 8, 57], 	[4, 9, 532], 	[4, 10, 316], 	[4, 11, 4], 	[4, 12, 22], 	[4, 13, 398], 	[4, 14, 232], 	[4, 15, 26], 	[4, 16, 77], 	[4, 17, 116], 	[4, 18, 289], 	[4, 19, 13], 	[4, 20, 207], 	[4, 21, 75], 	[4, 22, 201], 	[4, 23, 60], 	[4, 24, 143], 	[4, 25, 317], 	[4, 26, 18], 	[4, 27, 24], 	[4, 28, 130], 	[4, 29, 7], 	[4, 30, 144], 	[4, 31, 61], 	[4, 32, 196], 	[4, 33, 259], 	[4, 34, 7], 	[4, 35, 303], 	[4, 36, 114], 	[4, 37, 57], 	[4, 38, 289], 	[4, 39, 4], 	[4, 40, 212], 	[4, 41, 16], 	[4, 42, 229], 	[4, 43, 684], 	[4, 44, 49], 	[4, 45, 1], 	[4, 46, 182], 	[4, 47, 116], 	[4, 48, 49], 	[4, 49, 108], 	[4, 50, 12],
+[5, 0, 254], 	[5, 1, 31], 	[5, 2, 169], 	[5, 3, 117], 	[5, 4, 786], 	[5, 5, 94], 	[5, 6, 38], 	[5, 7, 26], 	[5, 8, 71], 	[5, 9, 491], 	[5, 10, 360], 	[5, 11, 14], 	[5, 12, 23], 	[5, 13, 504], 	[5, 14, 202], 	[5, 15, 37], 	[5, 16, 58], 	[5, 17, 150], 	[5, 18, 304], 	[5, 19, 12], 	[5, 20, 236], 	[5, 21, 51], 	[5, 22, 222], 	[5, 23, 76], 	[5, 24, 164], 	[5, 25, 278], 	[5, 26, 21], 	[5, 27, 24], 	[5, 28, 112], 	[5, 29, 13], 	[5, 30, 160], 	[5, 31, 68], 	[5, 32, 224], 	[5, 33, 307], 	[5, 34, 7], 	[5, 35, 354], 	[5, 36, 115], 	[5, 37, 70], 	[5, 38, 340], 	[5, 39, 5], 	[5, 40, 222], 	[5, 41, 11], 	[5, 42, 240], 	[5, 43, 686], 	[5, 44, 31], 	[5, 45, 14], 	[5, 46, 205], 	[5, 47, 137], 	[5, 48, 55], 	[5, 49, 118], 	[5, 50, 5],
+[6, 0, 321], 	[6, 1, 34], 	[6, 2, 192], 	[6, 3, 137], 	[6, 4, 923], 	[6, 5, 152], 	[6, 6, 68], 	[6, 7, 30], 	[6, 8, 66], 	[6, 9, 636], 	[6, 10, 410], 	[6, 11, 12], 	[6, 12, 34], 	[6, 13, 579], 	[6, 14, 266], 	[6, 15, 49], 	[6, 16, 83], 	[6, 17, 191], 	[6, 18, 308], 	[6, 19, 26], 	[6, 20, 231], 	[6, 21, 86], 	[6, 22, 245], 	[6, 23, 70], 	[6, 24, 222], 	[6, 25, 325], 	[6, 26, 24], 	[6, 27, 41], 	[6, 28, 114], 	[6, 29, 16], 	[6, 30, 191], 	[6, 31, 84], 	[6, 32, 278], 	[6, 33, 379], 	[6, 34, 10], 	[6, 35, 399], 	[6, 36, 158], 	[6, 37, 67], 	[6, 38, 368], 	[6, 39, 14], 	[6, 40, 296], 	[6, 41, 22], 	[6, 42, 264], 	[6, 43, 740], 	[6, 44, 38], 	[6, 45, 3], 	[6, 46, 221], 	[6, 47, 116], 	[6, 48, 51], 	[6, 49, 151], 	[6, 50, 11]
+
+
+
+			],
+        dataLabels: {
+            enabled: true,
+            color: '#000000'
+        }
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                yAxis: {
+                    labels: {
+                        formatter: function () {
+                            return this.value.charAt(0);
+                        }
+                    }
+                }
+            }
+        }]
+    }
+
+});
+		</script>
+	</body>
+</html>

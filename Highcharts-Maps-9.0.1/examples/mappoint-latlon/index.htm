@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Mass Murder Location</title>
+		<link rel="stylesheet" href="css/uikit.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+		<style type="text/css">
+#container {
+    height: 680px;
+    min-width: 310px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: blue;
+}
+		</style>
+	</head>
+	<body>
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-dark navbar-expand-md" uk-sticky="top: 200; ">
+			<div class="container">
+				<a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="navbar-brand font-weight-bold"> Gun Violence in the USA</a>
+
+			 </div>
+		 </nav>
+
+		 <!-- Side navigation -->
+		 <div class="container-fluid">
+				 <div class="row">
+						 <aside class="col-2 px-0 py-5 mt-5 fixed-top" id="left">
+						 <div class="list-group w-400">
+							 <a href="../../../Highcharts-Maps-9.0.1/examples/color-axis/index.htm" class="list-group-item bg-dark text-light">Map: People Killed</a>
+							 <a href="../../../Highcharts-Maps-9.0.1/examples/honeycomb-usa/index.htm"  class="list-group-item bg-dark text-light">Honeycomb: People Killed</a>
+							 <a href="../../../Highcharts-Maps-9.0.1/examples/mappoint-latlon/index.htm"  class="list-group-item bg-dark text-light">Mass Murder Location</a>
+							 <a href="../../../Highcharts-9.0.1/examples/dynamic-master-detail/index.htm" class="list-group-item bg-dark text-light">People Killed - Timeline</a>
+							 <a href="../../../Highcharts-9.0.1/examples/parliament-chart/index.htm"  class="list-group-item bg-dark text-light">Participant Ratio</a>
+							 <a href="../../../Highcharts-9.0.1/examples/3d-pie-donut/index.htm" class="list-group-item bg-dark text-light">Participant's Age Group</a>
+							 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20month/index.htm" class="list-group-item bg-dark text-light">People Killed (Month View)</a>
+							 <a href="../../../Highcharts-9.0.1/examples/column-rotated-labels%20-%20week/index.htm" class="list-group-item bg-dark text-light">People Killed (Day View)</a>
+							 <a href="../../../Highcharts-9.0.1/examples/column-drilldown/index.htm"  class="list-group-item bg-dark text-light">Type of Gun Used</a>
+							 <a href="../../../Highcharts-9.0.1/examples/bar-basic/index.htm" class="list-group-item bg-dark text-light">Relationship with Education</a>
+							 <a href="../../../Highcharts-9.0.1/examples/scatter/index.htm" class="list-group-item bg-dark text-light">Relationship with Politics</a>
+							 <a href="../../../Highcharts-9.0.1/examples/bar-negative-stack/index.htm" class="list-group-item bg-dark text-light">Relationship with Race</a>
+							 <a href="../../../Highcharts-9.0.1/examples/pie-basic/index.htm" class="list-group-item bg-dark text-light">Incident Characteristics</a>
+							 <a href="../../../index.html" class="list-group-item bg-dark text-light">Reference</a>
+						 </div>
+						 </aside>
+			 </div>
+		 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+<script src="../../code/highmaps.js"></script>
+<script src="../../code/modules/exporting.js"></script>
+<script src="../../code/modules/offline-exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+<div id="container"></div>
+
+<script type="text/javascript">
+// Initiate the chart
+Highcharts.mapChart('container', {
+
+    chart:
+		{
+        map: 'countries/us/us-all'
+    },
+
+    title:
+		{
+        text: 'Mass Murder in USA'
+    },
+
+    mapNavigation:
+		{
+        enabled: true
+    },
+
+		labelOptions:
+		{
+        borderWidth: 200
+    },
+
+		tooltip:
+		{
+        headerFormat: 'Killed ',
+        pointFormat: '<b>{point.name}</b>'
+    },
+
+
+		series:
+		[
+			{
+        // Use the gb-all map with no data as a basemap
+        name: 'basemap',
+        borderColor: '#A0A0A0',
+        nullColor: 'rgba(255, 100, 100, 0.1)',
+        showInLegend: false
+    },
+
+		{
+        name: 'Separators',
+        type: 'mapline',
+        nullColor: '#707070',
+        showInLegend: false,
+        enableMouseTracking: false
+    },
+
+		{
+        type: 'mappoint',
+        name: 'Mass Murder Site',
+				color: Highcharts.getOptions().colors[5],
+				allowPointSelect: false,
+        data: [
+					{name: '4', lat: 26.6089, lon: -80.1176},
+					{name: '4', lat: 28.0985, lon: -82.467},
+					{name: '4', lat: 29.0313, lon: -82.6723},
+					{name: '4', lat: 29.1582, lon: -99.7357},
+					{name: '4', lat: 29.2712, lon: -94.8192},
+					{name: '4', lat: 29.7542, lon: -95.8313},
+					{name: '4', lat: 29.7717, lon: -95.1392},
+					{name: '4', lat: 29.973, lon: -95.6542},
+					{name: '4', lat: 29.9988, lon: -81.709},
+					{name: '4', lat: 30.0194, lon: -82.3278},
+					{name: '4', lat: 30.1029, lon: -97.3288},
+					{name: '4', lat: 30.1343, lon: -97.5936},
+					{name: '4', lat: 30.2092, lon: -92.3562},
+					{name: '4', lat: 30.3068, lon: -81.7298},
+					{name: '4', lat: 30.4334, lon: -91.0817},
+					{name: '4', lat: 30.4653, lon: -81.6075},
+					{name: '4', lat: 30.5576, lon: -91.0835},
+					{name: '4', lat: 30.5576, lon: -91.0835},
+					{name: '4', lat: 31.1199, lon: -97.6832},
+					{name: '4', lat: 31.133, lon: -97.7944},
+					{name: '4', lat: 32.3065, lon: -90.239},
+					{name: '4', lat: 32.434, lon: -88.4973},
+					{name: '4', lat: 32.6412, lon: -96.9481},
+					{name: '4', lat: 32.7157, lon: -97.2597},
+					{name: '4', lat: 32.7865, lon: -115.579},
+					{name: '4', lat: 32.8634, lon: -90.4092},
+					{name: '4', lat: 32.8854, lon: -111.757},
+					{name: '4', lat: 32.9776, lon: -85.142},
+					{name: '4', lat: 33.3467, lon: -80.45},
+					{name: '4', lat: 33.384, lon: -83.9905},
+					{name: '4', lat: 33.475, lon: -112.137},
+					{name: '4', lat: 33.5904, lon: -117.656},
+					{name: '4', lat: 33.6121, lon: -111.864},
+					{name: '4', lat: 33.6619, lon: -96.6358},
+					{name: '4', lat: 33.6652, lon: -95.5505},
+					{name: '4', lat: 33.6858, lon: -86.8068},
+					{name: '4', lat: 33.7456, lon: -85.6606},
+					{name: '4', lat: 33.8031, lon: -117.943},
+					{name: '4', lat: 33.8091, lon: -84.8283},
+					{name: '4', lat: 33.9428, lon: -81.1725},
+					{name: '4', lat: 33.9799, lon: -117.905},
+					{name: '4', lat: 34.0274, lon: -118.351},
+					{name: '4', lat: 34.0559, lon: -117.396},
+					{name: '4', lat: 34.081, lon: -117.74},
+					{name: '4', lat: 34.0942, lon: -81.1525},
+					{name: '4', lat: 34.4144, lon: -119.857},
+					{name: '4', lat: 34.4738, lon: -118.533},
+					{name: '4', lat: 34.6474, lon: -82.748},
+					{name: '4', lat: 34.8341, lon: -82.5029},
+					{name: '4', lat: 34.8779, lon: -81.0499},
+					{name: '4', lat: 35.0483, lon: -106.49},
+					{name: '4', lat: 35.3867, lon: -97.4356},
+					{name: '4', lat: 35.6098, lon: -95.8909},
+					{name: '4', lat: 35.734, lon: -77.8724},
+					{name: '4', lat: 35.8423, lon: -90.7043},
+					{name: '4', lat: 35.9576, lon: -84.8407},
+					{name: '4', lat: 36.0922, lon: -95.791},
+					{name: '4', lat: 36.1329, lon: -95.8553},
+					{name: '4', lat: 36.1332, lon: -95.8551},
+					{name: '4', lat: 36.1485, lon: -115.298},
+					{name: '4', lat: 36.1688, lon: -77.8286},
+					{name: '4', lat: 36.1771, lon: -95.9403},
+					{name: '4', lat: 36.2405, lon: -95.9768},
+					{name: '4', lat: 36.327, lon: -115.296},
+					{name: '4', lat: 36.3457, lon: -80.3199},
+					{name: '4', lat: 36.8285, lon: -87.8527},
+					{name: '4', lat: 36.9327, lon: -84.1134},
+					{name: '4', lat: 37.236, lon: -77.4669},
+					{name: '4', lat: 37.2432, lon: -93.2613},
+					{name: '4', lat: 37.509, lon: -77.4748},
+					{name: '4', lat: 37.6774, lon: -120.961},
+					{name: '4', lat: 37.7596, lon: -122.405},
+					{name: '4', lat: 37.7737, lon: -122.426},
+					{name: '4', lat: 38.024, lon: -97.3183},
+					{name: '4', lat: 38.1368, lon: -97.4268},
+					{name: '4', lat: 38.1746, lon: -85.5286},
+					{name: '4', lat: 38.3943, lon: -122.364},
+					{name: '4', lat: 38.5157, lon: -86.1703},
+					{name: '4', lat: 38.7083, lon: -82.6423},
+					{name: '4', lat: 38.7409, lon: -90.4233},
+					{name: '4', lat: 38.754, lon: -90.201},
+					{name: '4', lat: 38.8013, lon: -104.762},
+					{name: '4', lat: 38.8363, lon: -104.811},
+					{name: '4', lat: 39.0161, lon: -95.728},
+					{name: '4', lat: 39.0379, lon: -95.6905},
+					{name: '4', lat: 39.2832, lon: -80.3488},
+					{name: '4', lat: 39.4922, lon: -94.6372},
+					{name: '4', lat: 39.6518, lon: -104.802},
+					{name: '4', lat: 39.717, lon: -86.1136},
+					{name: '4', lat: 39.811, lon: -86.1871},
+					{name: '4', lat: 39.8751, lon: -74.6662},
+					{name: '4', lat: 39.9533, lon: -83.0662},
+					{name: '4', lat: 39.959, lon: -82.5962},
+					{name: '4', lat: 40.0134, lon: -82.9664},
+					{name: '4', lat: 40.1165, lon: -111.598},
+					{name: '4', lat: 40.2927, lon: -74.0028},
+					{name: '4', lat: 40.3111, lon: -73.9904},
+					{name: '4', lat: 40.3331, lon: -75.9318},
+					{name: '4', lat: 40.3496, lon: -75.0176},
+					{name: '4', lat: 40.6008, lon: -111.903},
+					{name: '4', lat: 40.6349, lon: -122.231},
+					{name: '4', lat: 40.6557, lon: -73.7508},
+					{name: '4', lat: 40.6615, lon: -73.9076},
+					{name: '4', lat: 40.7122, lon: -73.9359},
+					{name: '4', lat: 40.804, lon: -81.3991},
+					{name: '4', lat: 41.086, lon: -87.5391},
+					{name: '4', lat: 41.1102, lon: -81.4771},
+					{name: '4', lat: 41.1774, lon: -112.031},
+					{name: '4', lat: 41.2236, lon: -84.339},
+					{name: '4', lat: 41.4346, lon: -75.9228},
+					{name: '4', lat: 41.4838, lon: -120.545},
+					{name: '4', lat: 41.518, lon: -81.6234},
+					{name: '4', lat: 41.7142, lon: -87.7481},
+					{name: '4', lat: 41.7601, lon: -87.5583},
+					{name: '4', lat: 41.7652, lon: -87.6616},
+					{name: '4', lat: 41.8815, lon: -87.9329},
+					{name: '4', lat: 42.092, lon: -111.879},
+					{name: '4', lat: 42.2938, lon: -89.1072},
+					{name: '4', lat: 42.4216, lon: -83.0539},
+					{name: '4', lat: 42.6045, lon: -83.3438},
+					{name: '4', lat: 42.6914, lon: -73.8712},
+					{name: '4', lat: 43.2367, lon: -77.5261},
+					{name: '4', lat: 44.1984, lon: -72.5351},
+					{name: '4', lat: 44.2029, lon: -88.4656},
+					{name: '4', lat: 44.5413, lon: -69.7247},
+					{name: '4', lat: 44.7906, lon: -69.7873},
+					{name: '4', lat: 44.9896, lon: -93.0457},
+					{name: '4', lat: 45.1936, lon: -122.768},
+					{name: '4', lat: 45.8562, lon: -97.1072},
+					{name: '4', lat: 47.0663, lon: -122.354},
+					{name: '4', lat: 47.5625, lon: -122.828},
+					{name: '4', lat: 47.9018, lon: -120.132},
+					{name: '4', lat: 60.589, lon: -151.316},
+					{name: '4', lat: 61.1537, lon: -149.874},
+					{name: '4', lat: 64.86, lon: -147.704},
+					{name: '5', lat: 26.0698, lon: -80.1367},
+					{name: '5', lat: 26.4815, lon: -81.8213},
+					{name: '5', lat: 29.6858, lon: -95.3668},
+					{name: '5', lat: 31.05, lon: -88.3088},
+					{name: '5', lat: 31.2124, lon: -83.8518},
+					{name: '5', lat: 32.1299, lon: -111.066},
+					{name: '5', lat: 32.2337, lon: -96.4661},
+					{name: '5', lat: 32.7793, lon: -96.8052},
+					{name: '5', lat: 33.4196, lon: -104.518},
+					{name: '5', lat: 33.5042, lon: -112.096},
+					{name: '5', lat: 33.5196, lon: -117.032},
+					{name: '5', lat: 33.5927, lon: -112.163},
+					{name: '5', lat: 33.6417, lon: -111.989},
+					{name: '5', lat: 33.7138, lon: -84.6692},
+					{name: '5', lat: 33.9881, lon: -82.2888},
+					{name: '5', lat: 34.0802, lon: -84.1272},
+					{name: '5', lat: 34.9791, lon: -106.716},
+					{name: '5', lat: 36.1666, lon: -115.062},
+					{name: '5', lat: 36.1958, lon: -115.224},
+					{name: '5', lat: 36.384, lon: -106.041},
+					{name: '5', lat: 36.7843, lon: -81.7848},
+					{name: '5', lat: 37.8982, lon: -82.886},
+					{name: '5', lat: 38.5631, lon: -77.9829},
+					{name: '5', lat: 39.0476, lon: -94.6699},
+					{name: '5', lat: 39.1149, lon: -85.8929},
+					{name: '5', lat: 39.6855, lon: -79.8588},
+					{name: '5', lat: 40.0521, lon: -79.3889},
+					{name: '5', lat: 40.1109, lon: -111.665},
+					{name: '5', lat: 40.33, lon: -76.0256},
+					{name: '5', lat: 40.4385, lon: -79.8722},
+					{name: '5', lat: 41.7037, lon: -87.6259},
+					{name: '5', lat: 42.4005, lon: -83.2571},
+					{name: '5', lat: 43.4981, lon: -70.449},
+					{name: '5', lat: 44.8975, lon: -89.6129},
+					{name: '5', lat: 46.3991, lon: -112.738},
+					{name: '5', lat: 47.303, lon: -122.31},
+					{name: '5', lat: 47.5033, lon: -122.931},
+					{name: '5', lat: 47.6919, lon: -95.4311},
+					{name: '5', lat: 48.092, lon: -122.155},
+					{name: '5', lat: 48.4646, lon: -122.338},
+					{name: '6', lat: 28.5799, lon: -81.2934},
+					{name: '6', lat: 30.0405, lon: -95.4424},
+					{name: '6', lat: 33.5989, lon: -82.2244},
+					{name: '6', lat: 34.026, lon: -118.461},
+					{name: '6', lat: 35.0905, lon: -85.2591},
+					{name: '6', lat: 36.7921, lon: -76.3293},
+					{name: '6', lat: 39.5417, lon: -90.3301},
+					{name: '6', lat: 40.0187, lon: -122.393},
+					{name: '6', lat: 42.2354, lon: -85.676},
+					{name: '6', lat: 43.011, lon: -75.0058},
+					{name: '6', lat: 43.3153, lon: -98.6045},
+					{name: '7', lat: 25.864, lon: -80.3122},
+					{name: '7', lat: 40.2459, lon: -75.282},
+					{name: '8', lat: 29.7555, lon: -82.8626},
+					{name: '8', lat: 29.9199, lon: -95.452},
+					{name: '8', lat: 31.4109, lon: -90.4609},
+					{name: '8', lat: 37.1956, lon: -91.9012},
+					{name: '8', lat: 39.0201, lon: -83.275},
+					{name: '9', lat: 31.5039, lon: -97.129},
+					{name: '9', lat: 32.7876, lon: -79.9332},
+					{name: '9', lat: 33.056, lon: -96.7261},
+					{name: '10', lat: 43.2628, lon: -123.28},
+					{name: '11', lat: 38.873, lon: -76.9977},
+					{name: '16', lat: 34.0758, lon: -117.277},
+					{name: '17', lat: 26.3045, lon: -80.2694},
+					{name: '27', lat: 29.2733, lon: -98.0564},
+					{name: '50', lat: 28.5195, lon: -81.3767},
+
+        ]
+    }]
+});
+
+		</script>
+
+
+				<p class="text-center">
+					<br>
+				This map shows the exact location of every mass murder during this time period and the number of people killed.
+				</p>
+
+
+	</body>
+</html>
